@@ -1,0 +1,21 @@
+* MyUsers
+
+This a little Django application that implements a custom user
+following the pattern described by Will Vincent
+([[https://wsvincent.com/django-custom-user-model-tutorial/]])
+
+Unlike earlier apps (simple_auth), this applicaiton strives to use
+only base django functionality, without any additional, external
+dependencies.  
+
+The application also includes several templates and forms that use
+semantic-ui for logging in and out, user registration, password
+management.  They can be found in <somewhere>.  In order for django to
+find these templates, they need be copied to
+the template directory in your main application OR ensure that
+~myuser~ appears in the list of INSTALLED_APPS before
+~django.auth.contrib~.
+
+
+To use the application, include it in your *new* django project
+*before* your first migration.
