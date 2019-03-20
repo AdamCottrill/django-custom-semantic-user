@@ -19,3 +19,16 @@ the template directory in your main application OR ensure that
 
 To use the application, include it in your *new* django project
 *before* your first migration.
+
+
+* Templates
+
+There are several templates included in this application. The
+templates have been styled with semantic-ui for a clean, uncluttered
+appearance.  they can be found in the root ~/templates directory.  The
+base template includes the follow blocks:
+
++ title
++ extra_head
++ content
++ extra_scripts
