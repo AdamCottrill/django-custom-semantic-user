@@ -32,3 +32,14 @@ base template includes the follow blocks:
 + extra_head
 + content
 + extra_scripts
+
+
+* Tests
+
+- verify that all of veiws that require authentication redirect to the
+login page
+
+- verify that all of the forms render form errors correctly
+
+- verify that valid data redirect as expected (what about the next
+  parameter?)

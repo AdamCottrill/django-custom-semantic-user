@@ -40,7 +40,7 @@ DJANGO_APPS = [
 ]
 
 MY_APPS = [
-    'myusers'
+    'myusers',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS
@@ -127,5 +127,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'myusers.CustomUser'
+
+
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_mails')
+
+
+#these should be in settings.local
+INSTALLED_APPS += ['debug_toolbar']
+
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = ['127.0.0.1',]
