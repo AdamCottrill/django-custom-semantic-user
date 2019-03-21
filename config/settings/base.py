@@ -13,17 +13,14 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!y5c572%wm%+_skad5=2ck%bkts4ei=2acir3%z$^jm%foh-m&'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -77,15 +74,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -135,13 +123,3 @@ LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_mails')
-
-
-#these should be in settings.local
-INSTALLED_APPS += ['debug_toolbar']
-
-MIDDLEWARE += [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
-
-INTERNAL_IPS = ['127.0.0.1',]
