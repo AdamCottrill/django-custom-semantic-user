@@ -23,6 +23,8 @@ import pytest
 
 from django.urls import reverse
 
+from myusers.tests.fixtures import joe_user
+
 
 def test_form_elements(client):
     """verify that the signup form contains the expected elements."""
@@ -225,18 +227,46 @@ def test_form_short_password(client):
 
 
 @pytest.mark.django_db
-def test_form_existing_username(client):
+def test_form_existing_username(client, joe_user):
     """If we submit the form with a username that already exists, we should
     see an appropriate error messages.
 
     """
-    assert 0 == 1
+
+    data = {
+        'username': joe_user.username,
+        'email': 'bart@simpsons.com',
+        'password1': 'Django123',
+        'password2': 'Django123',
+    }
+
+    response = client.post(reverse('signup'), data=data, follow=True)
+    assert 'signup.html' in [t.name for t in response.templates]
+    assert response.status_code == 200
+
+    content = response.content.decode('utf-8')
+    assert "Please fix the errors in the form below" in content
+    assert "A user with that username already exists." in content
 
 
 @pytest.mark.django_db
-def test_form_existing_email(client):
+def test_form_existing_email(client, joe_user):
     """If we submit the form with a email that already exists, we should
     see an appropriate error messages.
 
     """
-    assert 0 == 1
+
+    data = {
+        'username': 'bartsimpson',
+        'email': joe_user.email,
+        'password1': 'Django123',
+        'password2': 'Django123',
+    }
+
+    response = client.post(reverse('signup'), data=data, follow=True)
+    assert 'signup.html' in [t.name for t in response.templates]
+    assert response.status_code == 200
+
+    content = response.content.decode('utf-8')
+    assert "Please fix the errors in the form below" in content
+    assert "user with this Email address already exists." in content
