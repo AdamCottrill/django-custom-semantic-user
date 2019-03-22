@@ -6,11 +6,19 @@ from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
-    """Subclass the UserCreationForm"""
+    """Subclass the UserCreationForm
+
+    Note that e-mail is now a required field.
+    """
 
     class Meta(UserCreationForm):
         model = CustomUser
         fields = ("username", "email")
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
 
 
 class CustomUserChangeForm(UserChangeForm):

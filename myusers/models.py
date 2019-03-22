@@ -9,6 +9,11 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     """A custom user based on django's AbstractUser."""
 
+    REQUIRED_FIELDS = ['email', ]
+
+    class Meta(object):
+        unique_together = ('email',)
+
     def __str__(self):
         """the User's e-mail will be the string representation.
 
