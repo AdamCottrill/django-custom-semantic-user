@@ -62,23 +62,46 @@
                             </div>
                         {% endif %}
 
-                        <!-- Username -->
-                        <div class="field {% if form.username.errors %} error{% endif %}">
-                            {{ form.username.label_tag }}
-                            {{ form.username }}
-                            <small>{{ form.username.help_text}}</small>
 
-                        </div>
-                        {% if form.username.errors %}
-                            <div class="ui warning message">
-                                <ul class="list">
-                                    {% for error in form.username.errors %}
-                                        <li>{{ error|escape }}</li>
-                                    {% endfor %}
-                                </ul>
+                        <div  class="ui grid" >
+                            <div  class="eight wide column" >
+                                <!-- first_name -->
+                                <div class="field {% if form.first_name.errors %} error{% endif %}">
+                                    {{ form.first_name.label_tag }}
+                                    {{ form.first_name }}
+                                    <small>{{ form.first_name.help_text}}</small>
+
+                                </div>
+                                {% if form.first_name.errors %}
+                                    <div class="ui warning message">
+                                        <ul class="list">
+                                            {% for error in form.first_name.errors %}
+                                                <li>{{ error|escape }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div> 
+
+                            <div  class="eight wide column" >
+                                <!-- last_name -->
+                                <div class="field {% if form.last_name.errors %} error{% endif %}">
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name }}
+                                    <small>{{ form.last_name.help_text}}</small>
+
+                                </div>
+                                {% if form.last_name.errors %}
+                                    <div class="ui warning message">
+                                        <ul class="list">
+                                            {% for error in form.last_name.errors %}
+                                                <li>{{ error|escape }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </div>
-                        {% endif %}
-
+                        </div> 
 
                         <!-- Email -->
                         <div class="field {% if form.email.errors %} error{% endif %}">

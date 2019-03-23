@@ -8,7 +8,8 @@ Tests in this file include:
 
 + form elements
 + form success
-+ missing username
++ missing first_name
++ missing last_name
 + missing email
 + missing password1
 + missing password2
@@ -35,8 +36,11 @@ def test_form_elements(client):
 
     content = response.content.decode('utf-8')
 
+    print(content)
+
     assert "Sign-Up" in content
-    assert "Username:" in content
+    assert "First name:" in content
+    assert "Last name:" in content
     assert "Email address:" in content
     assert "Password:" in content
     assert "Password confirmation:" in content
@@ -47,7 +51,8 @@ def test_form_success(client):
     """Verify that we can sign up a new user with our form."""
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password1': 'Django123',
         'password2': 'Django123',
@@ -61,11 +66,34 @@ def test_form_success(client):
 
 
 @pytest.mark.django_db
-def test_form_missing_username(client):
-    """If we submit the form without a username, we should see an
+def test_form_missing_lastname(client):
+    """If we submit the form without a last name, we should see an
 bmo    appropriate error messages."""
 
     data = {
+        'first_name': 'bart',
+        'email': 'bart@simpsons.com',
+        'password1': 'Django123',
+        'password2': 'Django123',
+    }
+
+    response = client.post(reverse('signup'), data=data, follow=True)
+    assert 'signup.html' in [t.name for t in response.templates]
+    assert response.status_code == 200
+
+    content = response.content.decode('utf-8')
+
+    assert "Please fix the errors in the form below" in content
+    assert "This field is required." in content
+
+
+@pytest.mark.django_db
+def test_form_missing_firstname(client):
+    """If we submit the form without a firstname, we should see an
+bmo    appropriate error messages."""
+
+    data = {
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password1': 'Django123',
         'password2': 'Django123',
@@ -87,7 +115,8 @@ def test_form_missing_email(client):
     appropriate error messages."""
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'password1': 'Django123',
         'password2': 'Django123',
     }
@@ -110,7 +139,8 @@ def test_form_malformed_email(client):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bartsimpson',
         'password1': 'Django123',
         'password2': 'Django123',
@@ -135,7 +165,8 @@ def test_form_missing_password1(client):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password2': 'Django123',
     }
@@ -159,7 +190,8 @@ def test_form_missing_password2(client):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password2': 'Django123',
     }
@@ -183,7 +215,8 @@ def test_form_password_mismatch(client):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password1': '123Django',
         'password2': 'Django123',
@@ -208,7 +241,8 @@ def test_form_short_password(client):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': 'bart@simpsons.com',
         'password1': '2short',
         'password2': '2short',
@@ -227,29 +261,6 @@ def test_form_short_password(client):
 
 
 @pytest.mark.django_db
-def test_form_existing_username(client, joe_user):
-    """If we submit the form with a username that already exists, we should
-    see an appropriate error messages.
-
-    """
-
-    data = {
-        'username': joe_user.username,
-        'email': 'bart@simpsons.com',
-        'password1': 'Django123',
-        'password2': 'Django123',
-    }
-
-    response = client.post(reverse('signup'), data=data, follow=True)
-    assert 'signup.html' in [t.name for t in response.templates]
-    assert response.status_code == 200
-
-    content = response.content.decode('utf-8')
-    assert "Please fix the errors in the form below" in content
-    assert "A user with that username already exists." in content
-
-
-@pytest.mark.django_db
 def test_form_existing_email(client, joe_user):
     """If we submit the form with a email that already exists, we should
     see an appropriate error messages.
@@ -257,7 +268,8 @@ def test_form_existing_email(client, joe_user):
     """
 
     data = {
-        'username': 'bartsimpson',
+        'first_name': 'bart',
+        'last_name': 'simpson',
         'email': joe_user.email,
         'password1': 'Django123',
         'password2': 'Django123',
@@ -269,4 +281,4 @@ def test_form_existing_email(client, joe_user):
 
     content = response.content.decode('utf-8')
     assert "Please fix the errors in the form below" in content
-    assert "user with this Email address already exists." in content
+    assert "User with this Email address already exists." in content
