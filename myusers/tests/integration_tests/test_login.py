@@ -1,4 +1,4 @@
-"""Integration tests for login template
+"""Integration tests for the login template
 
 The login view extends uses a custom template. The tests in this file
 verify that the custom templates contains all of the necessary
@@ -6,8 +6,8 @@ elements including error messages and mark-up.
 
 Tests in this file include:
 
-+ form elements
-+ form success
++ login form elements
++ login form success
 + missing email (username)
 + missing password
 + wrong email (user does exsit)
