@@ -12,7 +12,8 @@ def joe_user(db):
         username='joeuser',
         first_name='Joe',
         last_name='User',
-        email='joeuser@gmail.com',
-        password=password)
+        email='joeuser@gmail.com'
+        )
+    joe.set_password(password)
     joe.save()
     return joe
