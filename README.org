@@ -4,9 +4,9 @@ This a little Django application that implements a custom user
 following the pattern described by Will Vincent
 ([[https://wsvincent.com/django-custom-user-model-tutorial/]])
 
-Unlike earlier apps (simple_auth), this applicaiton strives to use
+Unlike earlier apps (simple_auth), this application strives to use
 only base django functionality, without any additional, external
-dependencies.  
+dependencies.
 
 The application also includes several templates and forms that use
 semantic-ui for logging in and out, user registration, password
@@ -36,10 +36,6 @@ base template includes the follow blocks:
 
 * Tests
 
-- verify that all of veiws that require authentication redirect to the
-login page
+To run the tests, simply run the command:
 
-- verify that all of the forms render form errors correctly
-
-- verify that valid data redirect as expected (what about the next
-  parameter?)
+> py.test
