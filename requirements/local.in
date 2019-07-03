@@ -1,5 +1,4 @@
-
-pip-tools==3.5.0
-django-debug-toolbar==1.11
-pytest==4.3.1
-pytest-django==3.4.8
+pip-tools==3.8.0
+django-debug-toolbar==2.0
+pytest==5.0.0
+pytest-django==3.5.1
