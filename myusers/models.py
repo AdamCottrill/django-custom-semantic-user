@@ -11,17 +11,19 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     """A custom user based on django's AbstractUser."""
 
-    username = models.CharField(max_length=40, unique=False, default='')
-    email = models.EmailField("Email address", unique=True, null=True)
+    id = models.AutoField(primary_key=True)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name']
-    USERNAME_FIELD = 'email'
+    username = models.CharField(max_length=40, unique=True)
+    email = models.EmailField("Email address", unique=True)
+
+    REQUIRED_FIELDS = ["first_name", "last_name", "username"]
+    USERNAME_FIELD = "email"
 
     objects = CustomUserManager()
 
     class Meta(object):
-        verbose_name = 'user'
-        verbose_name_plural = 'users'
+        verbose_name = "user"
+        verbose_name_plural = "users"
 
     def __str__(self):
         """the User's e-mail will be the string representation.
@@ -32,7 +34,7 @@ class CustomUser(AbstractUser):
         return self.email
 
     def fullname(self):
-        """ the full name of a user will be their first name
+        """the full name of a user will be their first name
         followed by their last name separated by a space.
 
         e.g. bart simpson should be 'Bart Simpson'
