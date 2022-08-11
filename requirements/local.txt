@@ -6,18 +6,12 @@
 #
 asgiref==3.5.0
     # via django
-atomicwrites==1.4.0
-    # via pytest
 attrs==19.3.0
     # via pytest
 click==7.1.2
     # via pip-tools
-colorama==0.4.3
-    # via pytest
-django==3.2.12
-    # via
-    #   -r base.in
-    #   django-debug-toolbar
+django==3.2.15
+    # via django-debug-toolbar
 django-debug-toolbar==3.2.4
     # via -r local.in
 iniconfig==1.1.1
