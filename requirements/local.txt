@@ -6,18 +6,12 @@
 #
 asgiref==3.5.0
     # via django
-atomicwrites==1.4.0
-    # via pytest
 attrs==19.3.0
     # via pytest
 click==7.1.2
     # via pip-tools
-colorama==0.4.3
-    # via pytest
 django==3.2.12
-    # via
-    #   -r base.in
-    #   django-debug-toolbar
+    # via django-debug-toolbar
 django-debug-toolbar==3.2.4
     # via -r local.in
 iniconfig==1.1.1
@@ -52,7 +46,7 @@ tomli==2.0.1
     # via
     #   pep517
     #   pytest
-wheel==0.37.1
+wheel==0.38.1
     # via pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
