@@ -6,7 +6,7 @@
 #
 asgiref==3.5.0
     # via django
-django==3.2.12
+django==3.2.18
     # via -r base.in
 pytz==2020.1
     # via django
